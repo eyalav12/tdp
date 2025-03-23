@@ -8,9 +8,9 @@ import java.time.OffsetDateTime;
 
 @Entity
 @Table(name="showtimes")
-//@ShowtimeStartAndEndLimit()
+@ShowtimeStartAndEndLimit()
 public class Showtime {
-    public Showtime(Long movieId, String theater, OffsetDateTime startTime, OffsetDateTime endTime, double price) {
+    public Showtime(Long movieId, String theater, OffsetDateTime startTime, OffsetDateTime endTime, Double price) {
         this.movieId = movieId;
         this.theater = theater;
         this.startTime = startTime;
@@ -18,7 +18,7 @@ public class Showtime {
         this.price = price;
     }
 
-    public Showtime(Long id, Long movieId, String theater, OffsetDateTime startTime, OffsetDateTime endTime, double price) {
+    public Showtime(Long id, Long movieId, String theater, OffsetDateTime startTime, OffsetDateTime endTime, Double price) {
         this.id = id;
         this.movieId = movieId;
         this.theater = theater;
@@ -46,13 +46,7 @@ public class Showtime {
     private OffsetDateTime endTime;
     @NotNull(message = "movie price is required")
     @Positive(message = "price must be greater than 0")
-    private double price;
-
-
-    @AssertTrue(message = "End time must be after start time")
-    public boolean isEndTimeAfterStartTime() {
-        return endTime.isAfter(startTime);
-    }
+    private Double price;
 
     public Long getMovieId(){
         return movieId;
@@ -86,11 +80,11 @@ public class Showtime {
         this.endTime = endTime;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

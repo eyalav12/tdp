@@ -2,11 +2,13 @@ package com.att.tdp.popcorn_palace.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+
 
 @Entity
 @Table(name = "movies")
 public class Movie {
-
     public Movie() {}
 
     public Movie(String title,String genre, Integer duration,Double rating, Integer releaseYear){
@@ -38,7 +40,8 @@ public class Movie {
     @Positive(message = "movie duration can't be negative or zero")
     private Integer duration;
     @NotNull(message = "movie rating is required")
-    @PositiveOrZero(message = "movie rating can't be negative")
+    @Min(value = 0, message = "Rating cannot be less than 0")
+    @Max(value = 10, message = "Rating cannot be more than 10")
     private Double rating;
     @Column(name="release_year")
     @Positive(message = "release year can't be negative or zero")
