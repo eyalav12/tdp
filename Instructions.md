@@ -35,7 +35,7 @@ The project includes a `docker-compose.yml` file for spinning up a PostgreSQL co
 docker-compose up -d
 ```
 
-### 5. Build and Test the Project
+### 4. Build and Test the Project
 
 To build the project and install dependencies, run:
 
@@ -44,13 +44,13 @@ mvn clean install
 ```
 
 This will clean, build, and install the project, including running tests as part of the build process.
-### 6. Running Tests
+### 5. Running Tests
 
 To run only the unit tests, use:
 ```bash
 mvn test
 ```
-### 7.(Optinal) Run The Application
+### 6.(Optinal) Run The Application
 
 Once the project is built, you can optionally run the application using:
 
