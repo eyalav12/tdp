@@ -37,7 +37,7 @@ docker-compose up -d
 
 ### 5. Build and Test the Project
 
-To build the project install dependencies, run:
+To build the project and install dependencies, run:
 
 ```bash
 mvn clean install
