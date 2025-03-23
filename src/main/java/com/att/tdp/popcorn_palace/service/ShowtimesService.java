@@ -41,6 +41,11 @@ public class ShowtimesService {
         showtimesRepository.findById(showtimeId).ifPresentOrElse((showtimeFound)->{
             //verify here also that overlapping not allowed
             List<Showtime> allByTheaterWithOverlap = showtimesRepository.findAllByTheaterWithOverlap(showtime.getTheater(), showtime.getStartTime(), showtime.getEndTime());
+            allByTheaterWithOverlap.removeIf(s->s.getId().equals(showtimeId));
+            for (Showtime s: allByTheaterWithOverlap){
+                System.out.println(s.getId()+" "+s.getStartTime()+"->"+s.getEndTime());
+            }
+            System.out.println(allByTheaterWithOverlap);
             if(allByTheaterWithOverlap.isEmpty()){
                 showtimeFound.setMovieId(showtime.getMovieId());
                 showtimeFound.setTheater(showtime.getTheater());
