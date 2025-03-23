@@ -8,7 +8,7 @@ import java.time.OffsetDateTime;
 
 @Entity
 @Table(name="showtimes")
-@ShowtimeStartAndEndLimit()
+//@ShowtimeStartAndEndLimit()
 public class Showtime {
     public Showtime(Long movieId, String theater, OffsetDateTime startTime, OffsetDateTime endTime, double price) {
         this.movieId = movieId;
@@ -32,7 +32,7 @@ public class Showtime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Positive(message = "movie id can't be negative")
+    @Positive(message = "movie id can't be negative or zero")
     @NotNull(message = "Movie Id is required")
     @Column(name="movie")
     private Long movieId;
@@ -47,6 +47,12 @@ public class Showtime {
     @NotNull(message = "movie price is required")
     @Positive(message = "price must be greater than 0")
     private double price;
+
+
+    @AssertTrue(message = "End time must be after start time")
+    public boolean isEndTimeAfterStartTime() {
+        return endTime.isAfter(startTime);
+    }
 
     public Long getMovieId(){
         return movieId;
