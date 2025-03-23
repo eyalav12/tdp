@@ -9,7 +9,7 @@ public class Movie {
 
     public Movie() {}
 
-    public Movie(String title,String genre, int duration,double rating, int releaseYear){
+    public Movie(String title,String genre, Integer duration,Double rating, Integer releaseYear){
         this.title = title;
         this.genre = genre;
         this.duration = duration;
@@ -17,7 +17,7 @@ public class Movie {
         this.releaseYear = releaseYear;
     }
 
-    public Movie(Long id,String title,String genre, int duration,double rating, int releaseYear){
+    public Movie(Long id,String title,String genre, Integer duration,Double rating, Integer releaseYear){
         this.title = title;
         this.genre = genre;
         this.duration = duration;
@@ -35,14 +35,15 @@ public class Movie {
     @NotBlank(message = "movie genre can't be empty")
     private String genre;
     @NotNull(message = "movie duration is required")
-    @Positive(message = "movie duration can't be negative")
-    private int duration;
+    @Positive(message = "movie duration can't be negative or zero")
+    private Integer duration;
     @NotNull(message = "movie rating is required")
     @PositiveOrZero(message = "movie rating can't be negative")
-    private double rating;
+    private Double rating;
     @Column(name="release_year")
     @Positive(message = "release year can't be negative or zero")
-    private int releaseYear;
+    @NotNull(message = "release year is required")
+    private Integer releaseYear;
 
     public Long getId() {
         return id;
@@ -68,27 +69,27 @@ public class Movie {
         this.genre = genre;
     }
 
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
-    public int getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(int releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 }

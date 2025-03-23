@@ -3,7 +3,6 @@ package com.att.tdp.popcorn_palace.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
 
 import java.util.UUID;
 
@@ -17,14 +16,14 @@ public class Booking {
     @Positive(message = "showtime id can't be negative or zero")
     private Long showtimeId;
     @NotNull(message = "seat number is required")
-    @PositiveOrZero(message = "seat number can't be negative")
-    private int seatNumber;
+    @Positive(message = "seat number can't be negative or zero")
+    private Integer seatNumber;
     @NotNull(message = "user Id is required")
     private UUID userId;
 
     public Booking() {}
 
-    public Booking(UUID bookingId, Long showtimeId, int seatNumber, UUID userId) {
+    public Booking(UUID bookingId, Long showtimeId, Integer seatNumber, UUID userId) {
         this.bookingId = bookingId;
         this.showtimeId = showtimeId;
         this.seatNumber = seatNumber;
@@ -42,10 +41,10 @@ public class Booking {
     public void setShowtimeId(Long showtimeId){
         this.showtimeId = showtimeId;
     }
-    public int getSeatNumber(){
+    public Integer getSeatNumber(){
         return seatNumber;
     }
-    public void setSeatNumber(int seatNumber){
+    public void setSeatNumber(Integer seatNumber){
         this.seatNumber = seatNumber;
     }
     public UUID getUserId(){
