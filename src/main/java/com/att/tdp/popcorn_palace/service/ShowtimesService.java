@@ -20,35 +20,26 @@ public class ShowtimesService {
     }
 
     public Showtime getShowtimeById(Long showtimeId) {
-//        return showtimesRepository.getById(showtimeId);
-//        return showtimesRepository.findById(showtimeId)
-//                .orElseThrow(() -> new RuntimeException("Showtime not found for id " + showtimeId));
         return showtimesRepository.findById(showtimeId).orElseThrow(()-> new ResourceNotFoundException("Showtime not found for id " + showtimeId));
     }
 
 
     public Showtime addShowtime(Showtime showtime){
-//        return showtimesRepository.save(showtime);
+        //verify not adding overlapping showtimes on same theater
         List<Showtime> allByTheaterWithOverLap = showtimesRepository.findAllByTheaterWithOverlap(showtime.getTheater(), showtime.getStartTime(), showtime.getEndTime());
         if(allByTheaterWithOverLap.isEmpty()){
             return showtimesRepository.save(showtime);
         }
         else{
+            //overlapping times of two showtimes
             throw new ShowtimeOverlappingException("Showtime overlapping with an existing showtime in same theater.");
         }
     }
 
 
     public void updateShowtimeById(Long showtimeId,Showtime showtime){
-//        showtimesRepository.findById(showtimeId).ifPresent(showtimeFound->{
-//            showtimeFound.setMovieId(showtime.getMovieId());
-//            showtimeFound.setTheater(showtime.getTheater());
-//            showtimeFound.setStartTime(showtime.getStartTime());
-//            showtimeFound.setEndTime(showtime.getEndTime());
-//            showtimeFound.setPrice(showtime.getPrice());
-//            showtimesRepository.save(showtimeFound);
-//        });
         showtimesRepository.findById(showtimeId).ifPresentOrElse((showtimeFound)->{
+            //verify here also that overlapping not allowed
             List<Showtime> allByTheaterWithOverlap = showtimesRepository.findAllByTheaterWithOverlap(showtime.getTheater(), showtime.getStartTime(), showtime.getEndTime());
             if(allByTheaterWithOverlap.isEmpty()){
                 showtimeFound.setMovieId(showtime.getMovieId());
@@ -62,13 +53,13 @@ public class ShowtimesService {
                 throw new ShowtimeOverlappingException("Showtime overlapping with an existing showtime in same theater.");
             }
         },()->{
+            //not found the showtime with this id
             throw new ResourceNotFoundException("Showtime not found for id "+ showtimeId);
         });
 
     }
 
     public void deleteShowtimeById(Long showtimeId){
-//        showtimesRepository.deleteById(showtimeId);
         showtimesRepository.findById(showtimeId).ifPresentOrElse(showtimesRepository::delete, ()->{
             throw new ResourceNotFoundException("Showtime not found for id "+showtimeId);
         });

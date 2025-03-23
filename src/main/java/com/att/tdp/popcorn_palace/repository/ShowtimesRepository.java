@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface ShowtimesRepository extends JpaRepository<Showtime,Long> {
     @Query("SELECT showtime FROM Showtime showtime WHERE showtime.theater = ?1 AND showtime.endTime > ?2 AND showtime.startTime < ?3")
