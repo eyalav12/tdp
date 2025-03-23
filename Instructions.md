@@ -18,14 +18,14 @@
 Start by cloning the GitHub repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/eyalav12/tdp.git
 ```
 ### 2. Navigate to your Project Directory
 
 After cloning the repository, navigate to the project directory:
 
 ```bash
-cd your-repo
+cd tdp
 ```
 ### 3.(Optional) Setup PostgreSQL Database Using Docker
 
@@ -37,15 +37,16 @@ docker-compose up -d
 
 ### 5. Build and Test the Project
 
-To build the project and install dependencies, run:
+To build the project install dependencies, run:
 
 ```bash
 mvn clean install
 ```
+
+This will clean, build, and install the project, including running tests as part of the build process.
 ### 6. Running Tests
 
-To run the unit tests for the project, use the following command:
-
+To run only the unit tests, use:
 ```bash
 mvn test
 ```
